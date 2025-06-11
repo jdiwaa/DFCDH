@@ -1,6 +1,6 @@
 # DFCDH
 
-The repo is the official implementation for the paper: [Beyond Data Heterogeneity: A Multivariate Time Series Forecasting for Energy Systems through Enhanced Channel Fusion in Frequency Domain].
+The repo is the implementation for the paper: [Beyond Data Heterogeneity: A Multivariate Time Series Forecasting for Energy Systems through Enhanced Channel Fusion in Frequency Domain].
 
 
 # Updates

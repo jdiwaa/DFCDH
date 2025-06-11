@@ -15,20 +15,9 @@ pip install -r requirements.txt
 2. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/. You can reproduce the results as the following examples:
 
 ```
-# Multivariate forecasting with iTransformer
-bash ./scripts/multivariate_forecasting/Traffic/iTransformer.sh
+# Multivariate forecasting with DFCDH
+bash ./scripts/multivariate_forecasting/Weather/DFCDH.sh
 
-# Compare the performance of Transformer and iTransformer
-bash ./scripts/boost_performance/Weather/iTransformer.sh
-
-# Train the model with partial variates, and generalize on the unseen variates
-bash ./scripts/variate_generalization/ECL/iTransformer.sh
-
-# Test the performance on the enlarged lookback window
-bash ./scripts/increasing_lookback/Traffic/iTransformer.sh
-
-# Utilize FlashAttention for acceleration
-bash ./scripts/efficient_attentions/iFlashTransformer.sh
 ```
 
 ## Main Result of Multivariate Forecasting

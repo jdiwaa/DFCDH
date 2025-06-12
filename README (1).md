@@ -137,31 +137,25 @@ pip install numpy pandas
 
 ## Usage
 
-### Basic Training
+### Training
 ```bash
-# Train on Chengdu as target city
-python main.py --config config/chengdu_config.yaml
+# Train and evaluate on Weather dataset
+bash ./scripts/multivariate_forecasting/Weather/DFCDH.sh
 
-# Train on METR-LA as target city
-python main.py --config config/metr-la_config.yaml
+# Train and evaluate on ECL dataset
+bash ./scripts/multivariate_forecasting/ECL/DFCDH.sh
 
-# Train on PEMS-BAY as target city
-python main.py --config config/pems-bay_config.yaml
+# Train and evaluate on ETTm1 dataset
+bash ./scripts/multivariate_forecasting/DFCDH_ETTm1.sh
 
-# Train on Shenzhen as target city
-python main.py --config config/shenzhen_config.yaml
-```
+# Train and evaluate on ETTm2 dataset
+bash ./scripts/multivariate_forecasting/DFCDH_ETTm2.sh
 
+# Train and evaluate on ETTh1 dataset
+bash ./scripts/multivariate_forecasting/DFCDH_ETTh1.sh
 
-
-### Custom Configuration
-```bash
-# Override configuration parameters
-python main.py --config config/chengdu_config.yaml \
-    --seed 42 \
-    --cuda 0 \
-    --seq_len 24 \
-    --horizons 3，6，12
+# Train and evaluate on ETTh2 dataset
+bash ./scripts/multivariate_forecasting/DFCDH_ETTh2.sh
 ```
 
 ## Key Model Components

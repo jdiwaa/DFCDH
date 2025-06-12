@@ -123,16 +123,6 @@ pip install numpy pandas
 - `use_multi_gpu` (bool): Whether to use multiple GPUs.
 - `devices` (str): Comma-separated string listing GPU device IDs.
 
-### Additional Flags
-- `exp_name` (str): Experiment name.
-- `channel_independence` (bool): Whether to use channel independence mechanism.
-- `inverse` (bool): Whether to inverse the output data.
-- `class_strategy` (str): Classification strategy in the model (e.g., 'projection', 'average', 'cls_token').
-- `target_root_path` (str): Root path for target data file.
-- `target_data_path` (str): Target data filename.
-- `efficient_training` (bool): Whether to enable efficient training mode (partial training).
-- `use_norm` (bool): Whether to apply normalization and denormalization.
-- `partial_start_index` (int): Start index of variates for partial training in multi-variate data.
 
 
 ## Usage

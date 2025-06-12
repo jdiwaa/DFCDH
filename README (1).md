@@ -21,39 +21,41 @@ pip install numpy pandas
 ## Project Structure
 
 ```
-├── models/
-│   ├── __init__.py                    # Model module exports
-│   ├── optimized_tasa.py             # Main TASA model implementation
-│   │   ├── OptimizedTASAConfig       # Model configuration class
-│   │   ├── OptimizedSTAE             # Spatio-temporal adaptive embedding
-│   │   ├── CityAdaptationMechanism   # LoRA-based city adaptation
-│   │   └── OptimizedTASA             # Main model class
-│   ├── semi_self_attention.py        # Semi-self attention mechanisms
-│   │   ├── LoRAAdapter               # Low-rank adaptation layer
-│   │   ├── OptimizedSemiSelfAttention # Enhanced attention mechanism
-│   │   └── OptimizedSemiSelfAttentionBlock # Complete attention block
-│   └── spatial_transformer.py        # Spatial attention components
-│       ├── EfficientDualAttBlock     # Dual attention for spatial modeling
-│       └── LinearAttention           # Linear attention implementation
-├── utils/
-│   ├── __init__.py                   # Utility module exports
-│   ├── data_utils.py                 # Data processing utilities
-│   │   ├── read_meta_datasets()      # Multi-city data loading
-│   │   ├── generate_data()           # Sequence generation with normalization
-│   │   ├── construct_adj_safe()      # Leak-free adjacency matrix construction
-│   │   ├── strict_temporal_split()   # Temporal data splitting
-│   │   └── DataLoaderWithScaler      # Data loader with normalization info
-│   ├── train_utils.py                # Training utilities
-│   │   ├── set_random_seed()         # Reproducibility control
-│   │   ├── set_logger()              # Logging configuration
-│   │   └── evaluate_with_statistical_tests() # Statistical significance testing
-│   └── logger_utils.py               # Advanced logging utilities
-├── config/                           # Configuration files
-│   ├── chengdu_config.yaml           # Chengdu city configuration
-│   ├── metr-la_config.yaml           # METR-LA dataset configuration
-│   ├── pems-bay_config.yaml          # PEMS-BAY dataset configuration
-│   └── shenzhen_config.yaml          # Shenzhen city configuration
-└── main.py                          # Main training and evaluation script
+├── model/
+│   ├── __init__.py                 # Model module exports
+│   ├── DFCDH.py                    # Main DFCDH model implementation
+│       ├── moving_avg              # Moving average block to highlight the trend of time series
+│       ├── series_decomp           # Series decomposition block
+│       ├── Mahalanobis_mask        # Mask generator using Mahalanobis-style distance for dynamic channel selection
+│       └── Model                   # Core DFCDH forecasting model with frequency-enhanced embedding and masked attention
+├── layers/
+│   ├── __init__.py                 # Layer module exports
+│   ├── Embed.py                    # Embedding modules for input values and time features
+│   │   ├── PositionalEmbedding     # Fixed positional encoding using sine and cosine functions
+│   │   ├── TokenEmbedding          # Conv1D-based token embedding for input sequences
+│   │   ├── FixedEmbedding          # Fixed embedding layer for time features
+│   │   ├── TemporalEmbedding       # Temporal feature embedding using discrete encodings (month, day, hour...)
+│   │   ├── TimeFeatureEmbedding    # Alternative time encoding via linear projection (continuous time features)
+│   │   ├── DataEmbedding           # Combined embedding: value + positional + temporal
+│   │   └── DataEmbedding_inverted  # Inverted variant with optional covariate (e.g., timestamp) fusion
+│   ├── SelfAttention_Family.py     # Self-attention related modules
+│   │   ├── FullAttention           # Standard scaled dot-product attention
+│   │   └── AttentionLayer          # Multi-head attention
+│   └── Transformer_EncDec.py       # Transformer encoder-decoder layers
+│       ├── ConvLayer               # 1D convolution + normalization + pooling
+│       ├── EncoderLayer            # Transformer encoder block with attention and FFN
+│       ├── Encoder                 # Stack of encoder layers with optional conv layers
+│       ├── DecoderLayer            # Transformer decoder block with self- and cross-attention
+│       └── Decoder                 # Stack of decoder layers with optional norm and projection
+├── script/
+│   └── multivariate_forecasting/
+│       ├── ECL/
+│       │   ├── DFCDH.sh                # shell scripts related to the ECL dataset
+│       ├── ETT/
+│       │   ├── DFCDH_*.sh                # Shell scripts for the ETT dataset
+│       └── Weather/
+│           └── DFCDH.sh                # Shell scripts for the Weather dataset
+└── main.py                         # Main training and evaluation script
 ```
 
 ## Configuration Files

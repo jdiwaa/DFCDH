@@ -10,9 +10,9 @@ The repo is the implementation for the paper: [Beyond Data Heterogeneity: A Mult
 pip install -r requirements.txt
 ```
 
-1. The datasets can be obtained from [Google Drive](https://drive.usercontent.google.com/download?id=1NF7VEefXCmXuWNbnNe858WvQAkJ_7wuP&export=download&authuser=0)
+2. The datasets can be obtained from [Google Drive](https://drive.usercontent.google.com/download?id=1NF7VEefXCmXuWNbnNe858WvQAkJ_7wuP&export=download&authuser=0)
 
-2. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/. You can reproduce the results as the following examples:
+3. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/. You can reproduce the results as the following examples:
 
 ```
 # Multivariate forecasting with DFCDH

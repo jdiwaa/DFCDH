@@ -1,13 +1,13 @@
 # Beyond Data Heterogeneity: A Multivariate Time Series Forecastingfor Energy Systems through Enhanced Channel Fusion in Frequency Domain
 
-**ICDM 2025 Submission - Official Implementation**
+**Official Implementation**
 
 ## Installation
 
 ### Requirements
 ```bash
-Python >= 3.9
-PyTorch >= 2.1.0
+Python >= 3.10
+PyTorch >= 2.4.1
 CUDA >= 12.1 (recommended for GPU acceleration)
 ```
 

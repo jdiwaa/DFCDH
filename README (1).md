@@ -58,40 +58,82 @@ pip install numpy pandas
 └── run.py                         # Main training and evaluation script
 ```
 
-## Configuration Files
+## Model Parameter Explanation
 
-### Model Architecture Configuration
-```yaml
-model:
-  # Transformer Architecture
-  n_layer: 6                              # Number of transformer layers
-  n_head: 4                               # Number of attention heads per layer
-  n_embd: 64                              # Hidden embedding dimension
-  dropout: 0.1                            # Dropout rate
-  bias: false                             # Whether to use bias in linear layers
-  n_linear: 1                             # Number of linear layers in MLP
-  
-  # Input/Output Dimensions
-  input_dim: 2                            # Input feature dimensions (traffic + metadata)
-  output_dim: 1                           # Output dimension (traffic speed prediction)
-  
-  # Temporal Embeddings
-  tod_embedding_dim: 8                   # Time-of-day embedding dimension
-  dow_embedding_dim: 4                    # Day-of-week embedding dimension
-  
-  # Spatial Embeddings
-  spatial_embedding_dim: 8                # Node spatial embedding dimension
-  adaptive_embedding_dim: 8               # Adaptive embedding dimension
-  
-  # Layer Configuration
-  temporal_layers: 1                      # Number of temporal attention layers
-  spatial_layers: 1                       # Number of spatial attention layers
-  
-  # Spatial Partitioning
-  blocksize: 8                            # Nodes per spatial block
-  blocknum: 4                             # Number of spatial blocks
-  factors: 1                              # Spatial partitioning factor
-```
+- `is_training` (int): Indicates training status; 1 for training mode, 0 for evaluation/testing.
+- `model_id` (str): Identifier for the current model experiment.
+- `model` (str): Model name to be used (e.g., "DFCDH").
+
+### Data Loading
+- `data` (str): Dataset type, e.g., "custom" or predefined dataset names.
+- `root_path` (str): Root directory where dataset files are stored.
+- `data_path` (str): Filename of the CSV data file.
+- `features` (str): Forecasting task type:
+  - "M": multivariate input predicts multivariate output
+  - "S": univariate input predicts univariate output
+  - "MS": multivariate input predicts univariate output
+- `target` (str): Target feature name for univariate forecasting tasks.
+- `freq` (str): Frequency of the time series data for feature encoding; options include:
+  - 's' (secondly), 't' (minutely), 'h' (hourly), 'd' (daily),
+  - 'b' (business days), 'w' (weekly), 'm' (monthly),
+  - or detailed frequencies like '15min' or '3h'.
+- `checkpoints` (str): Directory path to save model checkpoints.
+
+### Forecasting Task Settings
+- `seq_len` (int): Length of the input sequence.
+- `label_len` (int): Length of the start token sequence (mostly used in some Transformer variants; optional here).
+- `pred_len` (int): Length of the prediction horizon (output sequence length).
+
+### Model Architecture Parameters
+- `enc_in` (int): Number of input features to the encoder.
+- `dec_in` (int): Number of input features to the decoder.
+- `c_out` (int): Number of output features predicted by the model.
+- `d_model` (int): Dimension of the embedding space used throughout the model.
+- `n_heads` (int): Number of attention heads in multi-head attention.
+- `e_layers` (int): Number of encoder layers.
+- `d_layers` (int): Number of decoder layers.
+- `d_ff` (int): Dimension of the feed-forward network inside Transformer layers.
+- `moving_avg` (int): Window size used for moving average smoothing (for trend extraction).
+- `factor` (int): Factor controlling attention sparsity or scaling (model-specific).
+- `distil` (bool): Whether to use distillation in the encoder to reduce sequence length.
+- `dropout` (float): Dropout rate applied to layers for regularization.
+- `embed` (str): Method of time feature encoding, options include:
+  - "timeF": time features,
+  - "fixed": fixed positional encoding,
+  - "learned": learned positional embedding.
+- `activation` (str): Activation function used inside layers, e.g., "relu" or "gelu".
+- `output_attention` (bool): Whether to output attention weights from the encoder.
+- `do_predict` (bool): Whether to run prediction on unseen future data after training/testing.
+
+### Optimization and Training Settings
+- `num_workers` (int): Number of subprocesses for data loading.
+- `itr` (int): Number of experiment repetitions.
+- `train_epochs` (int): Number of training epochs.
+- `batch_size` (int): Mini-batch size for training.
+- `patience` (int): Patience for early stopping.
+- `learning_rate` (float): Learning rate for the optimizer.
+- `des` (str): Experiment description or notes.
+- `loss` (str): Loss function used for training, e.g., "MSE".
+- `lradj` (str): Learning rate adjustment strategy.
+- `use_amp` (bool): Whether to use Automatic Mixed Precision training for speedup.
+
+### Hardware and Device Settings
+- `use_gpu` (bool): Whether to use GPU acceleration.
+- `gpu` (int): Default GPU device index.
+- `use_multi_gpu` (bool): Whether to use multiple GPUs.
+- `devices` (str): Comma-separated string listing GPU device IDs.
+
+### Additional Flags
+- `exp_name` (str): Experiment name.
+- `channel_independence` (bool): Whether to use channel independence mechanism.
+- `inverse` (bool): Whether to inverse the output data.
+- `class_strategy` (str): Classification strategy in the model (e.g., 'projection', 'average', 'cls_token').
+- `target_root_path` (str): Root path for target data file.
+- `target_data_path` (str): Target data filename.
+- `efficient_training` (bool): Whether to enable efficient training mode (partial training).
+- `use_norm` (bool): Whether to apply normalization and denormalization.
+- `partial_start_index` (int): Start index of variates for partial training in multi-variate data.
+
 
 ## Usage
 

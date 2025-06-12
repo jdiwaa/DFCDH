@@ -1,4 +1,4 @@
-# Transfer Needs More: Cross-city Traffic Prediction with Semantic-Topological Decoupling and Spatial Attention Enhancement
+# Beyond Data Heterogeneity: A Multivariate Time Series Forecastingfor Energy Systems through Enhanced Channel Fusion in Frequency Domain
 
 **ICDM 2025 Submission - Official Implementation**
 

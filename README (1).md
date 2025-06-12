@@ -158,23 +158,27 @@ bash ./scripts/multivariate_forecasting/DFCDH_ETTh1.sh
 bash ./scripts/multivariate_forecasting/DFCDH_ETTh2.sh
 ```
 
-## Key Model Components
+# Key Model Components
 
-### 1. OptimizedTASA (Main Model)
-- **Semantic-Topological Decoupling**: Separates shared traffic semantics from city-specific topology
-- **Parameter Separation**: Distinguishes between shared, private, and domain-specific parameters
+Our DFCDH model consists of the following major modules, illustrated in Figure 3 of the paper:
 
-### 2. Spatio-Temporal Adaptive Embedding (STAE)
-- **Multi-Modal Embedding**: Processes traffic data, temporal patterns, and spatial relationships
-- **Temporal Features**: Automatic generation of time-of-day and day-of-week embeddings
-- **Spatial Features**: Node-specific and adaptive spatial embeddings
+### 1. Frequency-enhanced Embedding Layer
+- Processes input data in the frequency domain to capture important periodic patterns.
+- Embeds the frequency-processed data into high-dimensional tokens for richer representations.
 
-### 3. Semi-Self Attention Mechanism
-- **Parameter Separation**: Uses shared parameters for Q,K and private parameters for V
-- **LoRA Adaptation**: Efficient low-rank adaptation for city-specific fine-tuning
-- **Attention Variants**: Standard, Flash, and Local attention implementations
+### 2. Mask Matrix Generator
+- Analyzes differences in seasonal and trend components among variables.
+- Generates mask matrices that guide the channel attention mechanism by controlling inter-channel interactions.
 
-### 4. Spatial Transformer
-- **Dual Attention**: Intra-block and inter-block attention for hierarchical spatial modeling
-- **Block Partitioning**: KD-tree based spatial partitioning for scalability
-- **Efficient Implementation**: LoRA-enhanced MLPs for reduced parameter overhead
+### 3. Masked Channel Attention Layer
+- Captures dependencies across different channels to effectively fuse multi-channel information.
+- Uses the mask matrices to prevent fusion between unrelated channels, enhancing robustness against data heterogeneity.
+
+### 4. Gated Linear Unit (GLU) Layer
+- Performs nonlinear transformations on features at each position to extract complex feature interactions.
+
+### 5. Projection Layer
+- Transforms the feature dimensions to produce the final prediction outputs.
+
+---
+

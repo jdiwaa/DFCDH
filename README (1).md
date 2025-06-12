@@ -55,7 +55,7 @@ pip install numpy pandas
 │       │   ├── DFCDH_*.sh          # Shell scripts for the ETT dataset
 │       └── Weather/
 │           └── DFCDH.sh            # Shell scripts for the Weather dataset
-└── main.py                         # Main training and evaluation script
+└── run.py                         # Main training and evaluation script
 ```
 
 ## Configuration Files

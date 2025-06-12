@@ -13,9 +13,9 @@ CUDA >= 12.1 (recommended for GPU acceleration)
 
 ### Dependencies
 ```bash
-pip install torch torchvision torchaudio
-pip install numpy pandas scikit-learn
-pip install pyyaml scipy matplotlib seaborn
+pip install torch torchvision 
+pip install scikit-learn matplotlib
+pip install numpy pandas 
 ```
 
 ## Project Structure
